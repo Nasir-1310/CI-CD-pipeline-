@@ -3,7 +3,7 @@ name: CI/CD Pipeline with Netlify
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-deploy:

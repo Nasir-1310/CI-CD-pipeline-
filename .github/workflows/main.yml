@@ -1,0 +1,37 @@
+name: CI/CD Pipeline with Netlify
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16 # Match your Node.js version
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Step 4: Run tests (optional, replace with actual test command)
+    - name: Run tests
+      run: echo "No tests available"
+
+    # Step 5: Deploy to Netlify
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v1.2.4
+      with:
+        publish-dir: . # For server apps, use the root directory
+        production-deploy: true
+        netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}

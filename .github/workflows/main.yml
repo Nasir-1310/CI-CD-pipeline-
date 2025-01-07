@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       # Install dependencies
       - name: Install dependencies
@@ -36,5 +36,4 @@ jobs:
         if: success()
         run: |
           npm install -g vercel
-          vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
-
+          vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }} --name  ci-cd

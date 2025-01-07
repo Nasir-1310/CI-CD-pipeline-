@@ -1,38 +1,40 @@
-name: CI/CD Pipeline with Netlify
+name: Node.js CI/CD with Vercel
 
 on:
   push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
+      # Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # Match your Node.js version
+          node-version: '20'
 
-      # Step 3: Install dependencies
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run tests (optional, replace with actual test command)
-      - name: Run tests
-        run: echo "No tests available"
+      # # Run tests
+      # - name: Run tests
+      #   run: npm test
 
-      # Step 5: Deploy to Netlify
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2.4
-        with:
-          publish-dir: public
-          # For server apps, use the root directory
-          production-deploy: true
-          github-token:: ${{ secrets.Nasir }}
+      # Deploy if tests pass
+      - name: Deploy to Vercel
+        if: success()
+        run: |
+          npm install -g vercel
+          vercel --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+

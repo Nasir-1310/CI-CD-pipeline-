@@ -34,4 +34,4 @@ jobs:
       with:
         publish-dir: . # For server apps, use the root directory
         production-deploy: true
-        netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        netlify-auth-token: ${{ secrets.net-testing-token }}

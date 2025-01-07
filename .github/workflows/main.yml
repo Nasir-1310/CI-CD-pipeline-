@@ -32,6 +32,7 @@ jobs:
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.2.4
       with:
-        publish-dir: . # For server apps, use the root directory
+        publish-dir: public
+# For server apps, use the root directory
         production-deploy: true
-        netlify-auth-token: ${{ secrets.net-testing-token }}
+        github-token:: ${{ secrets.testing_token }}
